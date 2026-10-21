@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Human Resources | Tea Business</title><style>
+:root{--navy:#16324f;--teal:#159a98;--bg:#f4f7fa;--line:#e2e8f0;--text:#243447;--muted:#718096;--white:#fff}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 "Segoe UI",Arial,sans-serif}
+.topbar{height:64px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 28px}
+.brand{font-weight:750;color:var(--navy);font-size:18px}.brand span{font-weight:400;color:var(--muted);font-size:12px;margin-left:10px}
+.container{max-width:1200px;margin:0 auto;padding:30px 24px}.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:1.5px;color:var(--teal);font-weight:800}
+h1{margin:5px 0 4px;font-size:30px;color:var(--navy)}.subtitle{margin:0;color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:25px 0}
+.card{background:var(--white);border:1px solid var(--line);border-radius:13px;padding:20px;box-shadow:0 3px 12px #16324f08}
+.metric-label{color:var(--muted);font-size:13px}.metric-value{font-size:27px;font-weight:750;color:var(--navy);margin-top:7px}
+.panel-head{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:16px}.panel-head h2{font-size:18px;margin:0;color:var(--navy)}
+button{border:0;border-radius:8px;background:var(--teal);color:#fff;padding:10px 15px;font-weight:700;cursor:pointer}button:hover{filter:brightness(.94)}
+.table-wrap{overflow-x:auto}table{width:100%;border-collapse:collapse;min-width:600px}th,td{text-align:left;padding:13px 12px;border-bottom:1px solid var(--line)}th{font-size:12px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);background:#f8fafc}tbody tr:hover{background:#f8fbfd}
+.pill{display:inline-block;padding:4px 9px;border-radius:999px;font-size:12px;font-weight:700;background:#e5f7f1;color:#13795b}.pill.warn{background:#fff4d6;color:#946200}.pill.bad{background:#ffe4e6;color:#b42332}
+.note{margin-top:18px;color:var(--muted);font-size:13px}
+.modal-bg{display:none;position:fixed;inset:0;background:#10203380;align-items:center;justify-content:center;padding:20px}.modal-bg.show{display:flex}.modal{background:#fff;width:min(520px,100%);border-radius:14px;padding:24px;box-shadow:0 20px 60px #0003}.modal h2{margin:0 0 18px;color:var(--navy)}.field{display:block;margin-bottom:13px;font-size:13px;font-weight:650;color:#526173}.field input,.field select{display:block;width:100%;padding:10px;margin-top:5px;border:1px solid #cbd5e1;border-radius:7px;font:inherit;color:var(--text);background:white}.actions{display:flex;justify-content:flex-end;gap:10px;margin-top:20px}.secondary{background:#e9eef4;color:#334155}
+@media(max-width:700px){.topbar{padding:0 16px}.container{padding:22px 14px}.cards{grid-template-columns:1fr}h1{font-size:25px}.brand span{display:none}}
+</style></head>
+<body><header class="topbar"><div class="brand">🍃 Tea Business Suite <span>Standalone Department Page</span></div><a href="index.html" style="color:#159a98;text-decoration:none;font-weight:700">← All Departments</a></header>
+<main class="container"><div class="eyebrow">Department Workspace</div><h1>Human Resources</h1><p class="subtitle">Employee records, recruitment, shift planning, and payroll.</p>
+<section class="cards"><div class="card"><div class="metric-label">Team Members</div><div class="metric-value">3</div></div><div class="card"><div class="metric-label">Shift Types</div><div class="metric-value">3</div></div><div class="card"><div class="metric-label">Departments</div><div class="metric-value">6</div></div></section>
+<section class="card"><div class="panel-head"><h2>Employee Directory</h2><button id="addBtn">Add Employee</button></div><div class="table-wrap"><table><thead><tr><th>Employee</th><th>Department</th><th>Role</th><th>Shift</th><th>Status</th></tr></thead><tbody id="dataRows"><tr><td>Alex Morgan</td><td>Materials Management</td><td>Inventory Clerk</td><td>Morning</td><td><span class="pill">Active</span></td></tr><tr><td>Jamie Lee</td><td>Sales &amp; Distribution</td><td>Store Supervisor</td><td>Afternoon</td><td><span class="pill">Active</span></td></tr><tr><td>Taylor Chen</td><td>Production Planning</td><td>Tea Maker</td><td>Morning</td><td><span class="pill">Active</span></td></tr></tbody></table></div><p class="note">Maintain employee records and organize department roles and shifts. Sample data is for demonstration.</p></section></main>
+<div class="modal-bg" id="modalBg"><div class="modal"><h2>Add Employee</h2><form id="recordForm"><label class="field">Employee Name<input name="employee_name" type="text" required></label><label class="field">Department<select name="department" required><option>Financial Accounting</option><option>Management Accounting</option><option>Materials Management</option><option>Sales &amp; Distribution</option><option>Production Planning</option><option>Human Resources</option></select></label><label class="field">Role<input name="role" type="text" required></label><label class="field">Shift<select name="shift" required><option>Morning</option><option>Afternoon</option><option>Evening</option></select></label><div class="actions"><button type="button" class="secondary" id="cancelBtn">Cancel</button><button type="submit">Save Record</button></div></form></div></div>
+<script>
+const modalBg=document.getElementById('modalBg');
+const form=document.getElementById('recordForm');
+const rows=document.getElementById('dataRows');
+document.getElementById('addBtn').addEventListener('click',()=>modalBg.classList.add('show'));
+document.getElementById('cancelBtn').addEventListener('click',()=>modalBg.classList.remove('show'));
+modalBg.addEventListener('click',e=>{if(e.target===modalBg)modalBg.classList.remove('show')});
+form.addEventListener('submit',e=>{
+  e.preventDefault();
+  const data=new FormData(form);
+  const cols=["Employee", "Department", "Role", "Shift", "Status"];
+  const names=["employee_name", "department", "role", "shift"];
+  const values=names.map(n=>data.get(n)||'—');
+  const tr=document.createElement('tr');
+  cols.forEach((col,i)=>{
+    const td=document.createElement('td');
+    const value=String(values[i] ?? '—');
+    if(col==='Status'||col==='Type'){
+      const span=document.createElement('span');
+      span.className='pill'+(['Low Stock','Preparing','Scheduled','In Progress','Expense'].includes(value)?' warn':'');
+      span.textContent=value; td.appendChild(span);
+    } else { td.textContent=value; }
+    tr.appendChild(td);
+  });
+  rows.prepend(tr);
+  modalBg.classList.remove('show');
+  form.reset();
+});
+</script></body></html>
